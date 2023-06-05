@@ -1,0 +1,49 @@
+<h2>Tabela</h2>
+
+<div>
+  <button (click)="abrirPopup()">Adicionar</button>
+</div>
+
+<input type="text" [(ngModel)]="filtroValor" placeholder="Filtrar por valor">
+<input type="text" [(ngModel)]="filtroMes" placeholder="Filtrar por mês">
+<input type="text" [(ngModel)]="filtroTexto" placeholder="Filtrar por texto">
+
+<table>
+  <thead>
+  <tr>
+    <th>Valor</th>
+    <th>Mês</th>
+    <th>Texto</th>
+    <th>Ações</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let linha of linhas | filtro:filtroValor:filtroMes:filtroTexto">
+    <td>{{ linha.valor }}</td>
+    <td>{{ linha.mes }}</td>
+    <td>{{ linha.texto }}</td>
+    <td>
+      <button (click)="editarLinha(linha)">Editar</button>
+      <button (click)="removerLinha(linha)">Remover</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="popupVisivel" class="popup">
+  <h3>Adicionar Linha</h3>
+
+  <label>Valor:</label>
+  <input type="text" [(ngModel)]="novaLinha.valor">
+
+  <label>Mês:</label>
+  <input type="text" [(ngModel)]="novaLinha.mes">
+
+  <label>Texto:</label>
+  <input type="text" [(ngModel)]="novaLinha.texto">
+
+  <div>
+    <button (click)="salvarLinha()">Salvar</button>
+    <button (click)="fecharPopup()">Cancelar</button>
+  </div>
+</div>
