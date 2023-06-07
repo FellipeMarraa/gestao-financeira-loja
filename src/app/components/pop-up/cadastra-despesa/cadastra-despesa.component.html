@@ -1,23 +1,47 @@
-<h1 mat-dialog-title>Cadastro de despesa</h1>
-<div id="cadastraDespesas">
-  <mat-dialog-content>
-    <mat-form-field>
-      <mat-label>Input</mat-label>
-      <input matInput>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Select</mat-label>
-      <mat-select>
-        <mat-option value="one">First option</mat-option>
-        <mat-option value="two">Second option</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Textarea</mat-label>
-      <textarea matInput></textarea>
-    </mat-form-field>
-  </mat-dialog-content>
+<div class="align-header">
+
+  <h1 mat-dialog-title>Cadastro de despesa</h1>
+
   <mat-dialog-actions align="end">
-    <button mat-button (click)="fecharPopup()">Fechar</button>
+    <button mat-button (click)="fecharPopup()" class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-dialog-actions>
+
+</div>
+
+<mat-dialog-content id="cadastraDespesas">
+
+  <mat-form-field>
+    <mat-label>Tipo de Despesa</mat-label>
+    <mat-select [(ngModel)]="data.despesa.value.tipo">
+      <mat-option ngDefaultControl *ngFor="let tipo of data.tiposDespesa" [value]="tipo.id">
+        {{tipo.descricao}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Descrição</mat-label>
+    <input matInput value="descricao" [value]="data.despesa.value.descricao"
+           [(ngModel)]="data.despesa.value.descricao">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Valor</mat-label>
+    <input matInput value="valor" [value]="data.despesa.value.valor" [(ngModel)]="data.despesa.value.valor">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input matInput value="data" [value]="data.despesa.value.data" [matDatepicker]="basicDatepicker"
+           [(ngModel)]="data.despesa.value.data">
+    <mat-datepicker-toggle matIconSuffix [for]="basicDatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #basicDatepicker></mat-datepicker>
+  </mat-form-field>
+</mat-dialog-content>
+<div class="align-buttons">
+  <mat-dialog-actions>
+    <button mat-button (click)="salvarDespesa()">Salvar</button>
   </mat-dialog-actions>
 </div>

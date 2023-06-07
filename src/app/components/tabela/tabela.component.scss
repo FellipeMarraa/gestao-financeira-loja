@@ -13,11 +13,10 @@ mat-paginator{
 #adicionarCampo{
   padding: 2%;
   margin-right: 5%;
-  float: right;
-
 
   button{
-    width: 40px;
+    float: right;
+    width: 200px;
     height: 40px;
   }
 }
@@ -25,5 +24,6 @@ mat-paginator{
 .green-icon{
   color: green;
 }
+
 
 

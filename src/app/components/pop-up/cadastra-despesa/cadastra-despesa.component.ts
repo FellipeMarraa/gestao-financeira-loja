@@ -14,7 +14,10 @@ export class CadastraDespesaComponent {
   ) {}
 
   fecharPopup(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({data: this.data, operacao: 'fechar'});
   }
 
+  salvarDespesa() {
+    this.dialogRef.close({data: this.data, operacao: 'salvar'});
+  }
 }

@@ -1,65 +1,44 @@
 <body>
 <div class="demo-button-container" id="adicionarCampo">
-  <button mat-raised-button (click)="openPopup()">
+  <button mat-raised-button (click)="openPopup(despesa)">
     <mat-icon class="green-icon">add</mat-icon>
+    Nova Despesa
   </button>
 </div>
 
 <div class="mat-elevation-z8" id="table">
-  <table mat-table [dataSource]="dataSource">
 
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+
+  <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="tipo">
       <th mat-header-cell *matHeaderCellDef> Tipo</th>
       <td mat-cell *matCellDef="let item">
-        <ng-container *ngIf="!item.editMode">{{ item.tipo }}</ng-container>
-        <ng-container *ngIf="item.editMode">
-          <mat-form-field>
-            <mat-label>Tipo de Despesa</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let tipo of tiposDespesas" [value]="tipo" [(ngModel)]="item.tipo">
-                {{getTipoDespesaLabel(tipo)}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </ng-container>
+        <ng-container>{{ tiposDespesas[item.tipo -1].descricao }}</ng-container>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="descricao">
       <th mat-header-cell *matHeaderCellDef> Descrição</th>
       <td mat-cell *matCellDef="let item">
-        <ng-container *ngIf="!item.editMode">{{ item.descricao }}</ng-container>
-        <ng-container *ngIf="item.editMode">
-          <input matInput value="descricao" [(ngModel)]="item.descricao" (keyup.enter)="editarCampo(item)">
-        </ng-container>
+        <ng-container>{{ item.descricao }}</ng-container>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="valor">
       <th mat-header-cell *matHeaderCellDef> Valor</th>
       <td mat-cell *matCellDef="let item">
-        <ng-container *ngIf="!item.editMode">{{ item.valor | currency }}</ng-container>
-        <ng-container *ngIf="item.editMode">
-          <input matInput value="valor" [(ngModel)]="item.valor" (keyup.enter)="editarCampo(item)">
-        </ng-container>
+        <ng-container>{{ item.valor | currency }}</ng-container>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="data">
       <th mat-header-cell *matHeaderCellDef> Data</th>
       <td mat-cell *matCellDef="let item">
-        <ng-container *ngIf="!item.editMode">{{ item.data | date: 'dd/MM/yyyy' }}</ng-container>
-        <ng-container *ngIf="item.editMode">
-          <mat-form-field>
-            <mat-label>Choose a date</mat-label>
-            <input matInput value="data" [matDatepicker]="basicDatepicker" [(ngModel)]="item.data" (keyup.enter)="editarCampo(item)">
-            <mat-datepicker-toggle matIconSuffix [for]="basicDatepicker"></mat-datepicker-toggle>
-            <mat-datepicker #basicDatepicker></mat-datepicker>
-          </mat-form-field>
-          <!--        <mat-form-field>-->
-          <!--          <input matInput type="datetime" [(ngModel)]="item.data" (keyup.enter)="editarCampo(item)">-->
-          <!--        </mat-form-field>-->
-        </ng-container>
+        <ng-container>{{ item.data | date: 'dd/MM/yyyy' }}</ng-container>
       </td>
     </ng-container>
 
@@ -74,11 +53,6 @@
             <mat-icon>delete</mat-icon>
           </button>
         </ng-container>
-        <ng-container *ngIf="item.editMode">
-          <button mat-icon-button color="primary" (click)="salvarCampo(item)">
-            <mat-icon>done</mat-icon>
-          </button>
-        </ng-container>
       </td>
     </ng-container>
 
@@ -86,10 +60,6 @@
     <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
 
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                 showFirstLastButtons
-                 aria-label="Select page of periodic elements">
-  </mat-paginator>
 </div>
 </body>
 

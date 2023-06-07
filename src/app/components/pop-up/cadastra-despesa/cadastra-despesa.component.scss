@@ -1,3 +1,15 @@
 #cadastraDespesas{
-  display:grid;
+  display: flex;
+  flex-flow: column;
+}
+
+.align-buttons{
+  display: flex;
+  float: right;
+}
+
+.align-header{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }

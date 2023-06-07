@@ -17,9 +17,6 @@ import {EstoqueComponent} from './components/estoque/estoque.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {TabelaComponent} from "./components/tabela/tabela.component";
 import {FiltroPipe} from './components/tabela/filtro.pipe';
-import {AddDespesaComponent} from './components/despesas/add-despesa/add-despesa.component';
-import {EditDespesaComponent} from './components/despesas/edit-despesa/edit-despesa.component';
-import {ListDespesaComponent} from './components/despesas/list-despesa/list-despesa.component';
 import {ToastrModule} from "ngx-toastr";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatTableModule} from "@angular/material/table";
@@ -58,9 +55,6 @@ export const MY_DATA_FORMATS = {
     EstoqueComponent,
     TabelaComponent,
     FiltroPipe,
-    AddDespesaComponent,
-    EditDespesaComponent,
-    ListDespesaComponent,
     CadastraDespesaComponent
   ],
   imports: [
@@ -87,6 +81,6 @@ export const MY_DATA_FORMATS = {
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,9 +1,7 @@
-import {TipoDespesa} from "./enums/tipo-despesa";
-
 export class Despesas {
 
   id: number;
-  tipo: TipoDespesa;
+  tipo: number;
   valor: number;
   descricao: string = '';
   data: any;
