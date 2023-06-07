@@ -6,6 +6,7 @@ export class Despesas {
   tipo: TipoDespesa;
   valor: number;
   descricao: string = '';
-  data: Date;
+  data: any;
+  editMode: boolean = false;
 
 }
