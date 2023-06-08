@@ -82,7 +82,7 @@ export class TabelaComponent implements AfterViewInit {
             }
           })
         } else {
-          this.despesas.push(result.despesa.value);
+          this.despesas.push(result.data.despesa.value);
         }
       }else{
 
