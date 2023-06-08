@@ -30,6 +30,7 @@ import {CommonModule} from "@angular/common";
 import {MatSelectModule} from "@angular/material/select";
 import {CadastraDespesaComponent} from "./components/pop-up/cadastra-despesa/cadastra-despesa.component";
 import {MatDialogModule} from "@angular/material/dialog";
+import {DespesaService} from "./service/despesa.service";
 
 export const MY_DATA_FORMATS = {
   parse: {
@@ -79,6 +80,7 @@ export const MY_DATA_FORMATS = {
     MatDialogModule
   ],
   providers: [
+    DespesaService,
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
   ],
   bootstrap: [AppComponent],

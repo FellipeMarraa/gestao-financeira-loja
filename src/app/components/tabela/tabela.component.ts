@@ -6,6 +6,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatDialog} from "@angular/material/dialog";
 import {CadastraDespesaComponent} from "../pop-up/cadastra-despesa/cadastra-despesa.component";
 import {FormControl, FormGroup} from "@angular/forms";
+import {DespesaService} from "../../service/despesa.service";
 
 @Component({
   selector: 'app-tabela',
@@ -14,32 +15,25 @@ import {FormControl, FormGroup} from "@angular/forms";
 })
 export class TabelaComponent implements AfterViewInit {
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private despesaService: DespesaService) {
   }
 
   @ViewChild(MatTable) table: MatTable<Despesas>;
 
   date = (moment(moment.utc().format("DD/MM/YYYY"))).format('DD/MM/YYYY');
-  despesas: Despesas[] = [
-    {id: 1, tipo: 1, descricao: 'Compra de produtos para reposição', valor: 298.50, data: this.date, editMode: false},
-    {id: 2, tipo: 2, descricao: 'Pagamento de água', valor: 400.50, data: this.date, editMode: false},
-    {id: 3, tipo: 3, descricao: 'Pagamento de Energia', valor: 500.50, data: this.date, editMode: false},
-    {id: 4, tipo: 1, descricao: 'Pagamento de Energia', valor: 500.50, data: this.date, editMode: false},
-    {id: 5, tipo: 1, descricao: 'Pagamento de Energia', valor: 500.50, data: this.date, editMode: false},
-    {id: 6, tipo: 1, descricao: 'Pagamento de Energia', valor: 500.50, data: this.date, editMode: false},
-    {id: 7, tipo: 1, descricao: 'Pagamento de Energia', valor: 500.50, data: this.date, editMode: false},
-    {id: 8, tipo: 1, descricao: 'Pagamento de Energia', valor: 500.50, data: this.date, editMode: false},
-    {id: 9, tipo: 1, descricao: 'Pagamento de Energia', valor: 500.50, data: this.date, editMode: false},
-    {id: 10, tipo: 1, descricao: 'Pagamento de Energia', valor: 500.50, data: this.date, editMode: false},
-    {id: 11, tipo: 1, descricao: 'Pagamento de Energia', valor: 500.50, data: this.date, editMode: false},
-
-  ];
+  despesas: Despesas[] = [];
 
   dataSource = new MatTableDataSource<Despesas>(this.despesas);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
+    this.getDespesas();
     this.dataSource.paginator = this.paginator;
+  }
+
+  getDespesas(): void {
+    this.despesaService.findDespesas()
+      .subscribe(despesas => this.despesas = despesas);
   }
 
   tiposDespesas: TipoDespesa[] = [
@@ -59,6 +53,14 @@ export class TabelaComponent implements AfterViewInit {
     data: new FormControl(new Date()),
     editMode: new FormControl(false)
   });
+
+  // addTask(despesa: number): void {
+  //   const newDespesa: Despesas = { despesa } as Despesas;
+  //   this.despesaService.createDespesa(newDespesa)
+  //     .subscribe(despesa => {
+  //       this.despesas.push(despesa);
+  //     });
+  // }
 
   openPopup(form: FormGroup): void {
 
